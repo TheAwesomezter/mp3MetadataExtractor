@@ -95,7 +95,7 @@ public class mainClass {
         }
     }
 
-    public static void view() {
+    public static void view(String usernameIN) {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("What do you want to view?: ");
@@ -111,7 +111,7 @@ public class mainClass {
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaProject", "root", "password");
                     Statement s = con.createStatement();
-                    ResultSet rs = s.executeQuery("select * from mp3files;");
+                    ResultSet rs = s.executeQuery("select * from mp3files where username = " + "'" + usernameIN + "'" + ";");
                     while (rs.next()) {
                         String title = rs.getString("title");
                         String genre = rs.getString("genre");
@@ -134,7 +134,7 @@ public class mainClass {
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaProject", "root", "password");
                     Statement s = con.createStatement();
-                    ResultSet rs = s.executeQuery("select * from genre;");
+                    ResultSet rs = s.executeQuery("select * from genre where username = " + "'" + usernameIN + "'" + ";");
                     while (rs.next()) {
                         String title = rs.getString("title");
                         String genre = rs.getString("genre");
@@ -157,7 +157,8 @@ public class mainClass {
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaProject", "root", "password");
                     Statement s = con.createStatement();
-                    ResultSet rs = s.executeQuery("select * from artist;");
+                    ResultSet rs = s.executeQuery("select * from artist where username = " + "'" + usernameIN + "'" + ";");
+
                     while (rs.next()) {
                         String title = rs.getString("title");
                         String artist = rs.getString("artist");
@@ -214,7 +215,7 @@ public class mainClass {
             switch(choice) {
                 case 1: insertValues(mp3Files, username);
                 break;
-                case 2: view();
+                case 2: view(username);
                 break;
                 case 3: System.exit(0);
                 break;
